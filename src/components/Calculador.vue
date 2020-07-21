@@ -4,7 +4,7 @@
             <div class="text-center title font-weight-black">{{output}}</div>
         </v-col>
 
-        <v-col cols="12" md="6" sm="12">
+        <v-col cols="12" md="6" sm="12" style="padding: 0px 25px">
             <v-select 
                 outlined :items="monedas" return-object
                 color="#005598" dense label="Moneda" item-text="nombre"
@@ -25,7 +25,7 @@
             </v-select>
         </v-col>
         
-        <v-col cols="12" md="6" sm="12">
+        <v-col cols="12" md="6" sm="12" style="padding: 0px 25px">
             <v-select 
                 outlined :items="cambios" return-object
                 color="#005598" dense label="Moneda" item-text="nombre"
@@ -46,11 +46,11 @@
             </v-select>
         </v-col>
 
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="12" sm="12" md="6" style="padding: 0px 25px">
             <v-text-field
                 type="number" outlined color="#005598"
                 hint="Monto de cambio" persistent-hint v-model="monto"
-                label="Monto" dense @input="calcular()"
+                label="Monto" dense @change="calcular()"
             ></v-text-field>
         </v-col>
     </v-row>
@@ -74,17 +74,17 @@ import accounting from 'accounting';
                 destino:{},
                 origen:{},
                 monedas:[
-                    {id:1,nombre:"Dolar",disabled:false,img:"dolar.svg"},
-                    {id:3,nombre:"Euro",disabled:false,img:"euro.svg"},
+                    {id:1,nombre:"Dolar",disabled:false,img:"dollar.png"},
+                    {id:3,nombre:"Euro",disabled:false,img:"euro.png"},
                     {id:4,nombre:"Petro",disabled:false,img:"petro.png"},
-                    {id:5,nombre:"Bitcoint",disabled:false,img:"bitcoin2.svg"},
-                    {id:6,nombre:"Dash",disabled:false,img:"dash.svg"},
-                    {id:7,nombre:"Dogecoint",disabled:false,img:"dogecoin.svg"},
-                    {id:8,nombre:"Litecoin",disabled:false,img:"litecoin.svg"},
-                    {id:9,nombre:"Ethereum",disabled:false,img:"eter.svg"},
+                    {id:5,nombre:"Bitcoint",disabled:false,img:"bitcoin.png"},
+                    {id:6,nombre:"Dash",disabled:false,img:"dashcoin.png"},
+                    {id:7,nombre:"Dogecoint",disabled:false,img:"dogecoin.png"},
+                    {id:8,nombre:"Litecoin",disabled:false,img:"litecoin.png"},
+                    {id:9,nombre:"Ethereum",disabled:false,img:"ethereum.png"},
                 ],
                 cambios:[
-                    {id:1,nombre:"Dolar",disabled:false,img:"dolar.svg"},
+                    {id:1,nombre:"Dolar",disabled:false,img:"dollar.png"},
                     {id:2,nombre:"Bolivar",disabled:false,img:"bs.png"},
                 ]
             }
