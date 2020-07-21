@@ -10,14 +10,8 @@
 		</v-row>
 
 		<v-row justify="center" v-if="!loading">
-			<v-col cols="12" md="9" sm="12">
-				<Calculadora :cripto="cripto" :petro="petro" />
-			</v-col>
-		</v-row>
-
-		<v-row justify="center" v-if="!loading">
-			<v-col cols="12" md="12" sm="12">
-				<Cambios :cambios="cambios" />
+			<v-col cols="12" md="10" sm="12">
+				<Dashboard :cambios="cambios" />
 			</v-col>
 		</v-row>
 
@@ -35,35 +29,72 @@
 import Cripto from '@/services/Cripto';
 import Petro from '@/services/Petro';
 import Dolar from '@/services/Dolar';
-import Calculadora from '@/components/Calculadora';
-import Cambios from '@/components/Cambios';
+import Dashboard from '@/components/Dashboard';
 import Footer from '@/components/Footer';
 import accounting from 'accounting';
+import {mapActions} from 'vuex';
 
 	export default {
 		name: 'App',
 		components:{
-			Calculadora,
-			Cambios,
-			Footer
+			Footer,
+			Dashboard
 		},
 		data(){
 			return {
 				cripto:null,
 				petro:null,
-				loading:false,
-				cambios:[]
+				tasas:{},
+				loading:true,
+				cambios:[],
+				sesion:0
 			}
 		},
 		mounted() {
 			this.init();
+			setInterval(() => {
+				this.init();
+			}, 500000);
+			
+		},
+		head: {
+			title: {
+				inner: 'AftimCalc',
+				separator:" "
+			},
+			link: [
+				{ rel: 'icon', href: require('../src/assets/AFTIM.png'), sizes: '16x16', type: 'image/png' }, 
+			],
 		},
 		methods:{
+			...mapActions(['setTasas']),
+
+			success(){
+                this.$toasted.success("Tasa actualizada", { 
+                    theme: "toasted-primary", 
+                    position: "top-right", 
+                    duration : 3000,
+                    //icon : "mdi-check",
+                });
+            },
 			init(){
-				this.loading = true;
+				this.sesion == 1 ? this.loading = false:this.loading = true;
 				this.getCripto();
 			},
 			finish(){
+				this.tasas = {
+					BTC:this.cripto.BTC.USD,
+					PTR:this.petro.PTR.BS,
+					EUR:this.petro.EUR.BS,
+					ETH:this.cripto.ETH.USD,
+					LTC:this.cripto.LTC.USD,
+					DASH:this.cripto.DASH.USD,
+					DOGE:this.cripto.DOGE.USD,
+					USD:this.petro.USD.BS,
+					PTR_USD:this.petro.PTR.USD,
+					EUR_USD:this.petro.EUR.USD
+				}
+				this.setTasas(this.tasas);
 				this.cambios.push(accounting.formatMoney(+this.cripto.BTC.USD*this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
 				this.cambios.push(accounting.formatMoney(+this.petro.EUR.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
 				this.cambios.push(accounting.formatMoney(+this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
@@ -73,27 +104,19 @@ import accounting from 'accounting';
 				this.cambios.push(accounting.formatMoney(+this.cripto.DASH.USD*this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
 				this.cambios.push(accounting.formatMoney(+this.cripto.DOGE.USD*this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
 				this.loading = false;
+				this.sesion=1;
+				this.success();
 			},
 			//tasa de bitcoint a dolares
 			getCripto(){
 				Cripto().get("/pricemulti?fsyms=BTC,ETH,DASH,DOGE,LTC&tsyms=USD").then((response) => {
 					this.cripto = response.data;
 					this.getPetro();
-					console.log(response.data);
 				}).catch(e => {
 					console.log(e);
-					this.loading = false;
+					//this.init();
 				});
 			},
-			/*getDolar(){
-				Dolar().get("/buy-bitcoins-online/ve/venezuela/transfers-with-specific-bank/.json").then((response) => {
-					this.bank = response.data.data.ad_list;
-					this.getPetro();
-				}).catch(e => {
-					console.log(e);
-					this.loading = false;
-				});
-			},*/
 			getPetro(){
 				let data = {
 					"coins": ["USD", "PTR","EUR"],
@@ -105,7 +128,7 @@ import accounting from 'accounting';
 					this.finish();
 				}).catch(e => {
 					console.log(e);
-					this.loading = false;
+					//this.init();
 				});
 			},
 		}
@@ -116,9 +139,6 @@ import accounting from 'accounting';
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bitter&display=swap');
 
 	@keyframes changeColor {
-		0%{
-			background:#fff;       /* Último fotograma */
-		}
 		100% {
 			background:#005598;       /* Último fotograma */
 		}
@@ -131,7 +151,7 @@ import accounting from 'accounting';
 	}
 	.anim {
 		background: #005598;
-		animation: changeColor 1s ease;  /* Relaciona con @keyframes */
+		animation: changeColor 2s ease;  /* Relaciona con @keyframes */
 		animation-fill-mode: forwards;
 	}
     html {

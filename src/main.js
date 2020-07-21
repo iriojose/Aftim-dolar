@@ -4,6 +4,8 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
+import toasted from './plugins/toasted';
+import head from "./plugins/head";
 
 Vue.config.productionTip = false
 
@@ -11,5 +13,7 @@ new Vue({
   router,
   store,
   vuetify,
+  toasted,
+  head,
   render: h => h(App)
 }).$mount('#app')
