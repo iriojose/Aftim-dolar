@@ -68,17 +68,17 @@ import accounting from 'accounting';
                 destino:{},
                 origen:{},
                 monedas:[
-                    {id:1,nombre:"Dolar",disabled:false,img:"dolar.svg"},
-                    {id:3,nombre:"Euro",disabled:false,img:"euro.svg"},
+                    {id:1,nombre:"Dolar",disabled:false,img:"dollar.png"},
+                    {id:3,nombre:"Euro",disabled:false,img:"euro.png"},
                     {id:4,nombre:"Petro",disabled:false,img:"petro.png"},
-                    {id:5,nombre:"Bitcoint",disabled:false,img:"bitcoin2.svg"},
-                    {id:6,nombre:"Dash",disabled:false,img:"dash.svg"},
-                    {id:7,nombre:"Dogecoint",disabled:false,img:"dogecoin.svg"},
-                    {id:8,nombre:"Litecoin",disabled:false,img:"litecoin.svg"},
-                    {id:9,nombre:"Ethereum",disabled:false,img:"eter.svg"},
+                    {id:5,nombre:"Bitcoint",disabled:false,img:"bitcoin.png"},
+                    {id:6,nombre:"Dash",disabled:false,img:"dashcoin.png"},
+                    {id:7,nombre:"Dogecoint",disabled:false,img:"dogecoin.png"},
+                    {id:8,nombre:"Litecoin",disabled:false,img:"litecoin.png"},
+                    {id:9,nombre:"Ethereum",disabled:false,img:"ethereum.png"},
                 ],
                 cambios:[
-                    {id:1,nombre:"Dolar",disabled:false,img:"dolar.svg"},
+                    {id:1,nombre:"Dolar",disabled:false,img:"dollar.png"},
                     {id:2,nombre:"Bolivar",disabled:false,img:"bs.png"},
                 ]
             }
