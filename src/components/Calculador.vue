@@ -50,7 +50,7 @@
             <v-text-field
                 type="number" outlined color="#005598"
                 hint="Monto de cambio" persistent-hint v-model="monto"
-                label="Monto" dense @change="calcular()"
+                label="Monto" dense @input="calcular()"
             ></v-text-field>
         </v-col>
     </v-row>
@@ -99,6 +99,8 @@ import accounting from 'accounting';
         watch: {
             select(){
                 this.monedas.filter(a => a.id == this.select ? this.origen = a:null);
+                this.output = accounting.formatMoney(0,{symbol:"Bs ",thousand:'.',decimal:','});
+                this.destino = this.cambios[1];
             }
         },
         methods:{
