@@ -78,6 +78,7 @@ import accounting from 'accounting';
                 output:null,
                 destino:{},
                 options: {
+                    locale: "es",
                     suffix: "",
                     precision: 2
                 },
@@ -95,13 +96,6 @@ import accounting from 'accounting';
                 cambios:[
                     {id:1,nombre:"Dolar",disabled:false,img:"dollar.png"},
                     {id:2,nombre:"Bolivar",disabled:false,img:"bs.png"},
-                    {id:3,nombre:"Euro",disabled:false,img:"euro.png"},
-                    {id:4,nombre:"Petro",disabled:false,img:"petro.png"},
-                    {id:5,nombre:"Bitcoint",disabled:false,img:"bitcoin.png"},
-                    {id:6,nombre:"Dash",disabled:false,img:"dashcoin.png"},
-                    {id:7,nombre:"Dogecoint",disabled:false,img:"dogecoin.png"},
-                    {id:8,nombre:"Litecoin",disabled:false,img:"litecoin.png"},
-                    {id:9,nombre:"Ethereum",disabled:false,img:"ethereum.png"},
                 ]
             }
         },
@@ -124,10 +118,9 @@ import accounting from 'accounting';
                 this.monedas.filter(a => a.id == this.select ? this.origen = a:null);
                 this.output = this.formatMoney(0,'Bs');
                 this.destino = this.cambios[1];
+                console.log(this.destino)
             },
-            monto(newValue){
-                console.log(newValue)
-            }
+            
         },
         methods:{
             formatMoney(monto, symbol){
