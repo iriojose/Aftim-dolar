@@ -69,7 +69,7 @@ import accounting from 'accounting';
         },
         data() {
             return {
-                monto:0,
+                monto: null,
                 output:null,
                 destino:{},
                 origen:{},
