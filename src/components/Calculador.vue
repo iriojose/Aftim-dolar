@@ -48,10 +48,10 @@
 
         <v-col cols="12" sm="12" md="6" style="padding: 0px 25px">
             <v-text-field
-                type="number" outlined color="#005598"
+                outlined color="#005598"
                 hint="Monto de cambio" persistent-hint v-model="monto"
                 label="Monto" dense @keyup="calcular()"
-            ></v-text-field>
+            ></v-text-field>          
         </v-col>
     </v-row>
 </template>
@@ -106,27 +106,49 @@ import accounting from 'accounting';
         watch: {
             select(){
                 this.monedas.filter(a => a.id == this.select ? this.origen = a:null);
+            },
+            monto: function(newValue) {
+                const result = newValue.replace(/[^0-9,]/g, "")
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                this.$nextTick(() => this.monto = result);
             }
         },
         methods:{
             calcular(){
-                if(this.origen.id == 1 && this.destino.id == 2)this.output = accounting.formatMoney(this.tasas.USD * this.monto,{symbol:"Bs ",thousand:'.',decimal:','});
-                if(this.origen.id == 3 && this.destino.id == 2)this.output = accounting.formatMoney(this.tasas.EUR * this.monto,{symbol:"Bs ",thousand:'.',decimal:','});
-                if(this.origen.id == 4 && this.destino.id == 2)this.output = accounting.formatMoney(this.tasas.PTR * this.monto,{symbol:"Bs ",thousand:'.',decimal:','});
-                if(this.origen.id == 5 && this.destino.id == 2)this.output = accounting.formatMoney(this.tasas.USD * this.tasas.BTC * this.monto,{symbol:"Bs ",thousand:'.',decimal:','});
-                if(this.origen.id == 6 && this.destino.id == 2)this.output = accounting.formatMoney(this.tasas.USD * this.tasas.DASH * this.monto,{symbol:"Bs ",thousand:'.',decimal:','});
-                if(this.origen.id == 7 && this.destino.id == 2)this.output = accounting.formatMoney(this.tasas.USD * this.tasas.DOGE * this.monto,{symbol:"Bs ",thousand:'.',decimal:','});
-                if(this.origen.id == 8 && this.destino.id == 2)this.output = accounting.formatMoney(this.tasas.USD * this.tasas.LTC * this.monto,{symbol:"Bs ",thousand:'.',decimal:','});
-                if(this.origen.id == 9 && this.destino.id == 2)this.output = accounting.formatMoney(this.tasas.USD * this.tasas.ETH * this.monto,{symbol:"Bs ",thousand:'.',decimal:','});
+                let parsedMonto = this.monto.replace('.',"").replace(",",".")
 
-                //if(this.origen.id == 1 && this.destino.id == 1)this.output = accounting.formatMoney(this.tasas.USD * this.monto,{symbol:"$ ",thousand:',',decimal:'.'});
-                if(this.origen.id == 3 && this.destino.id == 1)this.output = accounting.formatMoney(this.tasas.EUR_USD * this.monto,{symbol:"$ ",thousand:',',decimal:'.'});
-                if(this.origen.id == 4 && this.destino.id == 1)this.output = accounting.formatMoney(this.tasas.PTR_USD * this.monto,{symbol:"$  ",thousand:',',decimal:'.'});
-                if(this.origen.id == 5 && this.destino.id == 1)this.output = accounting.formatMoney(this.tasas.BTC * this.monto,{symbol:"$ ",thousand:',',decimal:'.'});
-                if(this.origen.id == 6 && this.destino.id == 1)this.output = accounting.formatMoney(this.tasas.DASH * this.monto,{symbol:"$ ",thousand:',',decimal:'.'});
-                if(this.origen.id == 7 && this.destino.id == 1)this.output = accounting.formatMoney(this.tasas.DOGE * this.monto,{symbol:"$ ",thousand:',',decimal:'.'});
-                if(this.origen.id == 8 && this.destino.id == 1)this.output = accounting.formatMoney(this.tasas.LTC * this.monto,{symbol:"$ ",thousand:',',decimal:'.'});
-                if(this.origen.id == 9 && this.destino.id == 1)this.output = accounting.formatMoney(this.tasas.ETH * this.monto,{symbol:"$ ",thousand:',',decimal:'.'});
+                if(this.origen.id == 1 && this.destino.id == 2)
+                    this.output = accounting.formatMoney(this.tasas.USD * parsedMonto,{symbol:"Bs ",thousand:'.',decimal:','});
+                if(this.origen.id == 3 && this.destino.id == 2)
+                    this.output = accounting.formatMoney(this.tasas.EUR * parsedMonto,{symbol:"Bs ",thousand:'.',decimal:','});
+                if(this.origen.id == 4 && this.destino.id == 2)
+                    this.output = accounting.formatMoney(this.tasas.PTR * parsedMonto,{symbol:"Bs ",thousand:'.',decimal:','});
+                if(this.origen.id == 5 && this.destino.id == 2)
+                    this.output = accounting.formatMoney(this.tasas.USD * this.tasas.BTC * parsedMonto,{symbol:"Bs ",thousand:'.',decimal:','});
+                if(this.origen.id == 6 && this.destino.id == 2)
+                    this.output = accounting.formatMoney(this.tasas.USD * this.tasas.DASH * parsedMonto,{symbol:"Bs ",thousand:'.',decimal:','});
+                if(this.origen.id == 7 && this.destino.id == 2)
+                    this.output = accounting.formatMoney(this.tasas.USD * this.tasas.DOGE * parsedMonto,{symbol:"Bs ",thousand:'.',decimal:','});
+                if(this.origen.id == 8 && this.destino.id == 2)
+                    this.output = accounting.formatMoney(this.tasas.USD * this.tasas.LTC * parsedMonto,{symbol:"Bs ",thousand:'.',decimal:','});
+                if(this.origen.id == 9 && this.destino.id == 2)
+                    this.output = accounting.formatMoney(this.tasas.USD * this.tasas.ETH * parsedMonto,{symbol:"Bs ",thousand:'.',decimal:','});
+
+                //if(this.origen.id == 1 && this.destino.id == 1)this.output = accounting.formatMoney(this.tasas.USD * parsedMonto,{symbol:"$ ",thousand:',',decimal:'.'});
+                if(this.origen.id == 3 && this.destino.id == 1)
+                    this.output = accounting.formatMoney(this.tasas.EUR_USD * parsedMonto,{symbol:"$ ",thousand:',',decimal:'.'});
+                if(this.origen.id == 4 && this.destino.id == 1)
+                    this.output = accounting.formatMoney(this.tasas.PTR_USD * parsedMonto,{symbol:"$  ",thousand:',',decimal:'.'});
+                if(this.origen.id == 5 && this.destino.id == 1)
+                    this.output = accounting.formatMoney(this.tasas.BTC * parsedMonto,{symbol:"$ ",thousand:',',decimal:'.'});
+                if(this.origen.id == 6 && this.destino.id == 1)
+                    this.output = accounting.formatMoney(this.tasas.DASH * parsedMonto,{symbol:"$ ",thousand:',',decimal:'.'});
+                if(this.origen.id == 7 && this.destino.id == 1)
+                    this.output = accounting.formatMoney(this.tasas.DOGE * parsedMonto,{symbol:"$ ",thousand:',',decimal:'.'});
+                if(this.origen.id == 8 && this.destino.id == 1)
+                    this.output = accounting.formatMoney(this.tasas.LTC * parsedMonto,{symbol:"$ ",thousand:',',decimal:'.'});
+                if(this.origen.id == 9 && this.destino.id == 1)
+                    this.output = accounting.formatMoney(this.tasas.ETH * parsedMonto,{symbol:"$ ",thousand:',',decimal:'.'});
             },
             disabledCash(evt){
                 this.cambios.filter(a => a.disabled=false);
