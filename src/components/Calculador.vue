@@ -106,6 +106,8 @@ import accounting from 'accounting';
         watch: {
             select(){
                 this.monedas.filter(a => a.id == this.select ? this.origen = a:null);
+                this.output = accounting.formatMoney(0,{symbol:"Bs ",thousand:'.',decimal:','});
+                this.destino = this.cambios[1];
             },
             monto: function(newValue) {
                 const result = newValue.replace(/[^0-9,]/g, "")
