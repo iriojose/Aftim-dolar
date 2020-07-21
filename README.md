@@ -1,4 +1,5 @@
 # aftim-dolar
+Calculator of multiple currency app
 
 ## Project setup
 ```
