@@ -50,7 +50,7 @@
             <v-text-field
                 type="number" outlined color="#005598"
                 hint="Monto de cambio" persistent-hint v-model="monto"
-                label="Monto" dense @input="calcular()"
+                label="Monto" dense @keyup="calcular()"
             ></v-text-field>
         </v-col>
     </v-row>
@@ -92,6 +92,13 @@ import accounting from 'accounting';
         mounted(){
             this.output = accounting.formatMoney(0,{symbol:"Bs ",thousand:'.',decimal:','});
             this.destino = this.cambios[1];
+        },
+        beforeUpdate(){
+            try{
+                this.calcular();
+            }catch(e){
+                null
+            }
         },
         computed:{
             ...mapState(['tasas'])
