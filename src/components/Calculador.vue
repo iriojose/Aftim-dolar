@@ -4,7 +4,7 @@
             <div class="text-center title font-weight-black">{{output}}</div>
         </v-col>
 
-        <v-col cols="12" md="6" sm="12">
+        <v-col cols="12" md="6" sm="12" style="padding: 0px 25px">
             <v-select 
                 outlined :items="monedas" return-object
                 color="#005598" dense label="Moneda" item-text="nombre"
@@ -25,7 +25,7 @@
             </v-select>
         </v-col>
         
-        <v-col cols="12" md="6" sm="12">
+        <v-col cols="12" md="6" sm="12" style="padding: 0px 25px">
             <v-select 
                 outlined :items="cambios" return-object
                 color="#005598" dense label="Moneda" item-text="nombre"
@@ -46,11 +46,11 @@
             </v-select>
         </v-col>
 
-        <v-col cols="12" sm="12" md="6">
+        <v-col cols="12" sm="12" md="6" style="padding: 0px 25px">
             <v-text-field
                 type="number" outlined color="#005598"
                 hint="Monto de cambio" persistent-hint v-model="monto"
-                label="Monto" dense @input="calcular()"
+                label="Monto" dense @change="calcular()"
             ></v-text-field>
         </v-col>
     </v-row>

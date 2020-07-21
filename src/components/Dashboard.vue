@@ -23,11 +23,14 @@
                     </v-row>
                 </v-stepper-content>
                 <v-stepper-content step="2">
-                    <v-card-title>
-                        <v-btn fab small class="mx-2" @click="e1 = 1"><v-icon>mdi-chevron-left</v-icon></v-btn>
-                        <div class="font-weight-black body-1">Volver</div>
-                    </v-card-title>
                     <Calculador />
+                    <v-card-title style="justify-content:center">
+                        <v-btn outlined medium color="error" class="mx-2" @click="e1 = 1">
+                        <v-icon>mdi-chevron-left</v-icon>&nbsp;&nbsp;&nbsp;
+                        <div class="font-weight-black subtitle-2">Volver</div>
+                        </v-btn>
+                        
+                    </v-card-title>
                 </v-stepper-content>
             </v-stepper>
         </v-card-text>
