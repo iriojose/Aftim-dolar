@@ -1,6 +1,6 @@
 <template>
     <v-row justify="center">
-        <v-col cols="12" sm="12" md="12">
+        <v-col cols="12" sm="12" md="12" class="mb-3">
             <div class="text-center title font-weight-black">{{output}}</div>
         </v-col>
 
