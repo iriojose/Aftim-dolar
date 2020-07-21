@@ -1,11 +1,15 @@
 <template>
 	<v-app :class="loading ? '':'anim'">
-		<div v-if="!loading" class="text-center">
-			<v-avatar size="150" class="mx-2">
-				<v-img :src="require('@/assets/AFTIM.png')"></v-img>
-			</v-avatar>
-			<span class="white--text font-weight-black display-1">AftimCalc</span>
-		</div>
+		<v-row justify="center" class="mt-4">
+			<div v-if="!loading" class="text-center">
+				<v-avatar size="70" >
+					<v-img :src="require('@/assets/AFTIM.png')"></v-img>
+				</v-avatar>
+			</div>
+			<span class="white--text font-weight-black display-1" style="line-height:70px;margin-left: 10px">
+				Aftim Calculator
+			</span>
+		</v-row>
 
 		<v-row justify="center" v-if="!loading">
 			<v-col cols="12" md="10" sm="12">
