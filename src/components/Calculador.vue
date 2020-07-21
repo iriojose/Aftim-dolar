@@ -61,6 +61,12 @@ import {mapState} from 'vuex';
 import accounting from 'accounting';
 
     export default {
+        props:{
+            select:{
+                type:Number,
+                default:1
+            }
+        },
         data() {
             return {
                 monto:0,
@@ -85,9 +91,15 @@ import accounting from 'accounting';
         },
         mounted(){
             this.output = accounting.formatMoney(0,{symbol:"Bs ",thousand:'.',decimal:','});
+            this.destino = this.cambios[1];
         },
         computed:{
             ...mapState(['tasas'])
+        },
+        watch: {
+            select(){
+                this.monedas.filter(a => a.id == this.select ? this.origen = a:null);
+            }
         },
         methods:{
             calcular(){
@@ -120,7 +132,3 @@ import accounting from 'accounting';
         }
     }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

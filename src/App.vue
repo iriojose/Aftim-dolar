@@ -1,13 +1,11 @@
 <template>
 	<v-app :class="loading ? '':'anim'">
-		<v-row justify="center" v-if="!loading">
-			<div>
-				<v-img width="200" height="200" contain :src="require('@/assets/AFTIM.png')"></v-img>
-				<div class="text-center text display-1 font-weight-black white--text" v-if="!loading">
-					AftimCalc
-				</div>
-			</div>
-		</v-row>
+		<div v-if="!loading" class="text-center">
+			<v-avatar size="150" class="mx-2">
+				<v-img :src="require('@/assets/AFTIM.png')"></v-img>
+			</v-avatar>
+			<span class="white--text font-weight-black display-1">AftimCalc</span>
+		</div>
 
 		<v-row justify="center" v-if="!loading">
 			<v-col cols="12" md="10" sm="12">
@@ -17,9 +15,9 @@
 
 		<Footer v-if="!loading" />
 
-		<v-card v-if="loading" elevation="0" width="100%" height="1000">
-			<v-row justify="center" class="fill-height">
-				<v-img width="400" height="400" contain :src="require('@/assets/loader.gif')"></v-img>
+		<v-card v-if="loading" elevation="0" width="100%" height="100%">
+			<v-row justify="center" class="fill-height" align="center">
+				<v-img width="500" height="500" contain :src="require('@/assets/loader.gif')"></v-img>
 			</v-row>
 		</v-card>
 	</v-app>
