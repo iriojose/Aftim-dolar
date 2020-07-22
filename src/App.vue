@@ -44,8 +44,12 @@ import {mapActions} from 'vuex';
 		},
 		data(){
 			return {
+				bolivar:null,
 				cripto:null,
 				petro:null,
+				dolar: null,
+				dolarAux: null,
+				euro: null,
 				tasas:{},
 				loading:true,
 				cambios:[],
@@ -87,19 +91,19 @@ import {mapActions} from 'vuex';
 				this.tasas = {
 					BTC:this.cripto.BTC.USD,
 					PTR:this.petro.PTR.BS,
-					EUR:this.petro.EUR.BS,
+					EUR:this.euro,
 					ETH:this.cripto.ETH.USD,
 					LTC:this.cripto.LTC.USD,
 					DASH:this.cripto.DASH.USD,
 					DOGE:this.cripto.DOGE.USD,
-					USD:this.petro.USD.BS,
+					USD:this.dolar,
 					PTR_USD:this.petro.PTR.USD,
 					EUR_USD:this.petro.EUR.USD
 				}
 				this.setTasas(this.tasas);
 				this.cambios.push(accounting.formatMoney(+this.cripto.BTC.USD*this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
-				this.cambios.push(accounting.formatMoney(+this.petro.EUR.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
-				this.cambios.push(accounting.formatMoney(+this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
+				this.cambios.push(accounting.formatMoney(+this.euro,{symbol:"Bs ",thousand:'.',decimal:','}));
+				this.cambios.push(accounting.formatMoney(+this.dolar,{symbol:"Bs ",thousand:'.',decimal:','}));
 				this.cambios.push(accounting.formatMoney(+this.petro.PTR.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
 				this.cambios.push(accounting.formatMoney(+this.cripto.ETH.USD*this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
 				this.cambios.push(accounting.formatMoney(+this.cripto.LTC.USD*this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
@@ -113,10 +117,9 @@ import {mapActions} from 'vuex';
 			getCripto(){
 				Cripto().get("/pricemulti?fsyms=BTC,ETH,DASH,DOGE,LTC&tsyms=USD").then((response) => {
 					this.cripto = response.data;
-					this.getPetro();
+					this.getDolar();
 				}).catch(e => {
 					console.log(e);
-					//this.init();
 				});
 			},
 			getPetro(){
@@ -130,9 +133,50 @@ import {mapActions} from 'vuex';
 					this.finish();
 				}).catch(e => {
 					console.log(e);
-					//this.init();
 				});
 			},
+			getDolar(){
+				let prom = 0;
+
+				Dolar().get('/ve/venezuela/transfers-with-specific-bank/.json').then(( response ) => {
+					let devider = 0;
+					for (let i = 0; i < response.data.data.ad_count; i++) {
+						if (response.data.data.ad_list[i].data.currency === 'VES') {
+							prom += parseFloat(response.data.data.ad_list[i].data.temp_price);
+							devider++;
+						}
+					}
+
+					prom = (prom / devider).toFixed(2);
+					this.bolivar = prom;
+					let dolar = (+prom / +this.cripto.BTC.USD).toFixed(2);
+					this.dolarAux = dolar;
+					this.dolar = dolar;
+					this.getEuro();
+				}).catch(e => {
+					console.log(e);
+				});
+			},
+			getEuro(){
+				let prom = 0;
+				Dolar().get('/es/spain/.json').then(( response ) => {
+					let devider = 0;
+					for (let i = 0; i < response.data.data.ad_count; i++) {
+						if (response.data.data.ad_list[i].data.currency === 'EUR') {
+							prom += parseFloat(response.data.data.ad_list[i].data.temp_price);
+							devider++;
+						}
+					}
+
+					prom = (prom / devider).toFixed(2);
+					let euro = (+this.bolivar / +prom).toFixed(2);
+					this.euro = euro;
+					this.getPetro();
+				}).catch(e => {
+					console.log(e);
+				});
+				
+			}
 		}
 	};
 </script>

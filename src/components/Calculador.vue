@@ -118,7 +118,6 @@ import accounting from 'accounting';
                 this.monedas.filter(a => a.id == this.select ? this.origen = a:null);
                 this.output = this.formatMoney(0,'Bs');
                 this.destino = this.cambios[1];
-                console.log(this.destino)
             },
             
         },
@@ -134,7 +133,7 @@ import accounting from 'accounting';
                         if(this.origen.id == 3)
                             this.output = this.formatMoney(this.tasas.EUR_USD * parsedMonto, '$');
                         if(this.origen.id == 4)
-                            this.output = this.formatMoney(this.tasas.PTR_USD * parsedMonto, "$");
+                            this.output = this.formatMoney(this.tasas.USD * parsedMonto, "$");
                         if(this.origen.id == 5)
                             this.output = this.formatMoney(this.tasas.BTC * parsedMonto,'$');
                         if(this.origen.id == 6)
