@@ -5,13 +5,15 @@
                 <v-stepper-content step="1" color="#005598">
                     <v-row justify="center" class="my-10 mx-5">
                         <v-col cols="12" md="3" sm="12" v-for="(n,i) in 8" :key="n" class="mb-6">
-                            <v-card class="scale" outlined elevation="0" width="100%" height="175" @click="ir(imagenes[i].id)">
+                            <v-card class="scale" outlined elevation="0" width="100%" height="220" @click="ir(imagenes[i].id)">
                                 <div class="tipo subtitle-2 ">{{imagenes[i].text}}</div>
                                 <v-row justify="center" class="pt-4">
                                     <v-img class="bg" contain width="100" height="100" :src="require('@/assets/'+imagenes[i].img)"></v-img>
                                 </v-row>
                                 <v-divider class="mt-3"></v-divider>
-                                <div class="text-center font-weight-bold subtitle-1 mt-2">{{cambios[i]}}</div>
+                                <div class="text-center font-weight-bold subtitle-1 mt-2">{{cambiosDolar[i]}}</div>
+                                <v-divider class="mt-2"></v-divider>
+                                <div class="text-center font-weight-bold subtitle-1 mt-2">{{cambiosBs[i]}}</div>
                             </v-card>
                         </v-col>
                     </v-row>
@@ -38,7 +40,11 @@ import Calculador from '@/components/Calculador';
             Calculador,
         },
         props:{
-            cambios:{
+            cambiosBs:{
+                type:Array,
+                default:() => ([])
+            },
+            cambiosDolar:{
                 type:Array,
                 default:() => ([])
             }

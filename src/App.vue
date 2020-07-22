@@ -13,7 +13,7 @@
 
 		<v-row justify="center" v-if="!loading">
 			<v-col cols="12" md="10" sm="12">
-				<Dashboard :cambios="cambios" />
+				<Dashboard :cambiosBs="cambiosBs" :cambiosDolar="cambiosDolar" />
 			</v-col>
 		</v-row>
 
@@ -52,7 +52,8 @@ import {mapActions} from 'vuex';
 				euro: null,
 				tasas:{},
 				loading:true,
-				cambios:[],
+				cambiosBs:[],
+				cambiosDolar:[],
 				sesion:0
 			}
 		},
@@ -126,14 +127,26 @@ import {mapActions} from 'vuex';
 					EUR_USD:this.petro.EUR.USD
 				}
 				this.setTasas(this.tasas);
-				this.cambios.push(accounting.formatMoney(+this.dolar,{symbol:"Bs ",thousand:'.',decimal:','}));
-				this.cambios.push(accounting.formatMoney(+this.euro,{symbol:"Bs ",thousand:'.',decimal:','}));
-				this.cambios.push(accounting.formatMoney(+this.cripto.BTC.USD*this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
-				this.cambios.push(accounting.formatMoney(+this.petro.PTR.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
-				this.cambios.push(accounting.formatMoney(+this.cripto.ETH.USD*this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
-				this.cambios.push(accounting.formatMoney(+this.cripto.LTC.USD*this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
-				this.cambios.push(accounting.formatMoney(+this.cripto.DASH.USD*this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
-				this.cambios.push(accounting.formatMoney(+this.cripto.DOGE.USD*this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
+
+				// cambios en bolivares
+				this.cambiosBs.push(accounting.formatMoney(+this.dolar,{symbol:"Bs ",thousand:'.',decimal:','}));
+				this.cambiosBs.push(accounting.formatMoney(+this.euro,{symbol:"Bs ",thousand:'.',decimal:','}));
+				this.cambiosBs.push(accounting.formatMoney(+this.cripto.BTC.USD * this.dolarAux,{symbol:"Bs ",thousand:'.',decimal:','}));
+				this.cambiosBs.push(accounting.formatMoney(+this.petro.PTR.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
+				this.cambiosBs.push(accounting.formatMoney(+this.cripto.ETH.USD * this.dolarAux,{symbol:"Bs ",thousand:'.',decimal:','}));
+				this.cambiosBs.push(accounting.formatMoney(+this.cripto.LTC.USD * this.dolarAux,{symbol:"Bs ",thousand:'.',decimal:','}));
+				this.cambiosBs.push(accounting.formatMoney(+this.cripto.DASH.USD * this.dolarAux,{symbol:"Bs ",thousand:'.',decimal:','}));
+				this.cambiosBs.push(accounting.formatMoney(+this.cripto.DOGE.USD * this.dolarAux,{symbol:"Bs ",thousand:'.',decimal:','}));
+
+				// cambios en dolares
+				this.cambiosDolar.push(accounting.formatMoney(1,{symbol:"$ ",thousand:'.',decimal:','}));
+				this.cambiosDolar.push(accounting.formatMoney(+this.euro / +this.dolar,{symbol:"$ ",thousand:'.',decimal:','}));
+				this.cambiosDolar.push(accounting.formatMoney(+this.cripto.BTC.USD,{symbol:"$ ",thousand:'.',decimal:','}));
+				this.cambiosDolar.push(accounting.formatMoney(+this.petro.PTR.USD,{symbol:"$ ",thousand:'.',decimal:','}));
+				this.cambiosDolar.push(accounting.formatMoney(+this.cripto.ETH.USD,{symbol:"$ ",thousand:'.',decimal:','}));
+				this.cambiosDolar.push(accounting.formatMoney(+this.cripto.LTC.USD,{symbol:"$ ",thousand:'.',decimal:','}));
+				this.cambiosDolar.push(accounting.formatMoney(+this.cripto.DASH.USD,{symbol:"$ ",thousand:'.',decimal:','}));
+				this.cambiosDolar.push(accounting.formatMoney(+this.cripto.DOGE.USD,{symbol:"$ ",thousand:'.',decimal:','}));
 				this.loading = false;
 				this.sesion=1;
 				this.success();
