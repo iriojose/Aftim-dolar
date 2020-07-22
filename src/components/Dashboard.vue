@@ -48,9 +48,9 @@ import Calculador from '@/components/Calculador';
                 e1:1,
                 select:null,
                 imagenes:[
-                    {id:5,img:"bitcoin.png",text:"BTC"},
-                    {id:3,img:"euro.png",text:"EUR"},
                     {id:1,img:"dollar.png",text:"USD"},
+                    {id:3,img:"euro.png",text:"EUR"},
+                    {id:5,img:"bitcoin.png",text:"BTC"},
                     {id:4,img:"petro.png",text:"PTR"},
                     {id:9,img:"ethereum.png",text:"ETH"},
                     {id:8,img:"litecoin.png",text:"LTC"},

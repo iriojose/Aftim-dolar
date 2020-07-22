@@ -6,8 +6,8 @@
 					<v-img :src="require('@/assets/AFTIM.png')"></v-img>
 				</v-avatar>
 			</div>
-			<span class="white--text font-weight-black display-1" style="line-height:70px;margin-left: 10px">
-				Aftim Calculator
+			<span class="white--text font-weight-black display-2" style="line-height:70px;margin-left: 10px">
+				Aftim Calcula
 			</span>
 		</v-row>
 
@@ -101,9 +101,9 @@ import {mapActions} from 'vuex';
 					EUR_USD:this.petro.EUR.USD
 				}
 				this.setTasas(this.tasas);
-				this.cambios.push(accounting.formatMoney(+this.cripto.BTC.USD*this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
-				this.cambios.push(accounting.formatMoney(+this.euro,{symbol:"Bs ",thousand:'.',decimal:','}));
 				this.cambios.push(accounting.formatMoney(+this.dolar,{symbol:"Bs ",thousand:'.',decimal:','}));
+				this.cambios.push(accounting.formatMoney(+this.euro,{symbol:"Bs ",thousand:'.',decimal:','}));
+				this.cambios.push(accounting.formatMoney(+this.cripto.BTC.USD*this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
 				this.cambios.push(accounting.formatMoney(+this.petro.PTR.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
 				this.cambios.push(accounting.formatMoney(+this.cripto.ETH.USD*this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
 				this.cambios.push(accounting.formatMoney(+this.cripto.LTC.USD*this.petro.USD.BS,{symbol:"Bs ",thousand:'.',decimal:','}));
