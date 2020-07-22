@@ -130,6 +130,7 @@ import {mapActions} from 'vuex';
 
 				Petro().post("/price/",data).then((response) => {
 					this.petro = response.data.data;
+					this.euro = Math.abs(+this.petro.EUR.BS - +this.euro) + +this.euro
 					this.finish();
 				}).catch(e => {
 					console.log(e);
