@@ -65,13 +65,15 @@ import {mapActions} from 'vuex';
 		},
 		metaInfo() {
 			return { 
-				title: "Aftim calc | Calculadora de multiples monedas",
+				title: "Aftim calc",
 				meta: [
 					{ name: 'description', content:  'Aftim calc es una calculadora de multiples monedas desarrollada en venezuela por la empresa somos sistemas C.A, incluye cripto monedas como bitcoin, litecoin, dash, dogecoin y monedas internacionales como dolares y euros.'},
 					{ property: 'og:title', content: "Aftim calc | Calculadora de multiples monedas"},
 					{ property: 'og:site_name', content: 'Aftim calc'},
-					{property: 'og:type', content: 'website'},    
-					{name: 'robots', content: 'index,follow'} 
+					{ property: 'og:type', content: 'website'},    
+					{ property: 'og:url', content: 'https://somossistemas.com/aftim-dolar'},
+                	{ property: 'og:image', content:'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpictame2.com%2Ftag%2FSomosSistemas%2F&psig=AOvVaw17-oGe22fz8OtZPtwYqu6T&ust=1595511553134000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKDUifX94OoCFQAAAAAdAAAAABAD' },  
+					{ name: 'robots', content: 'index,follow'} 
 				]
 			}
 		},
