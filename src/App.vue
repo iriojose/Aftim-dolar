@@ -62,9 +62,20 @@ import {mapActions} from 'vuex';
 			setInterval(() => {
 				this.init();
 			}, 500000);
-			
 		},
-		head: {
+		metaInfo() {
+			return { 
+				title: "Aftim calc | Calculadora de multiples monedas",
+				meta: [
+					{ name: 'description', content:  'Aftim calc es una calculadora de multiples monedas desarrollada en venezuela por la empresa somos sistemas C.A, incluye cripto monedas como bitcoin, litecoin, dash, dogecoin y monedas internacionales como dolares y euros.'},
+					{ property: 'og:title', content: "Aftim calc | Calculadora de multiples monedas"},
+					{ property: 'og:site_name', content: 'Aftim calc'},
+					{property: 'og:type', content: 'website'},    
+					{name: 'robots', content: 'index,follow'} 
+				]
+			}
+		},
+		/*head: {
 			title: {
 				inner: 'AftimCalc',
 				separator:" "
@@ -78,18 +89,6 @@ import {mapActions} from 'vuex';
 				//{ name: 'twitter:title', content: 'Content Title' },
 				// with shorthand
 				//{ n: 'twitter:description', c: 'Content description less than 200 characters'},
-				// ...
-				// Google+ / Schema.org
-				{ itemprop: 'Aftim calcula', content: 'Aplicación para calcular en multiples monedas internaciones y criptomonedas' },
-				//{ itemprop: 'description', content: 'Content Title' },
-				// ...
-				// Facebook / Open Graph
-				//{ property: 'fb:app_id', content: '123456789' },
-				//{ property: 'og:title', content: 'Content Title' },
-				// with shorthand
-				{ p: 'og:image', c: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpictame2.com%2Ftag%2FSomosSistemas%2F&psig=AOvVaw17-oGe22fz8OtZPtwYqu6T&ust=1595511553134000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKDUifX94OoCFQAAAAAdAAAAABAD' },
-				// ...
-			],
 			link: [
 				{ rel: 'somos sistemas C.A', href: 'somossistemas.com', undo: false }, // undo property - not to remove the element
 				{ rel: 'icon', href: require('../src/assets/AFTIM.png'), sizes: '16x16', type: 'image/png' }, 
@@ -97,7 +96,7 @@ import {mapActions} from 'vuex';
 			style: [
 				{ type: 'text/css', inner: 'body { background-color: #000; color: #fff}', undo: false },
 			]
-		},
+		},*/
 		methods:{
 			...mapActions(['setTasas']),
 
